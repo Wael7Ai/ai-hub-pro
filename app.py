@@ -5,6 +5,24 @@ from pypdf import PdfReader
 
 # إعداد الشاشة والواجهة
 st.set_page_config(page_title="AI Hub Pro - المنصة الموحدة", page_icon="🤖", layout="wide")
+# ==========================================
+# نظام حماية المنصة بكلمة سر
+# ==========================================
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+
+if not st.session_state.authenticated:
+    st.title("🔒 تسجيل الدخول إلى AI Hub Pro")
+    password_input = st.text_input("أدخل كلمة السر للدخول:", type="password")
+    
+    if st.button("تسجيل الدخول"):
+        # يمكنك تغيير كلمة السر (Wael2026) إلى أي كلمة سر تفضلها
+        if password_input == "Wael&2026": 
+            st.session_state.authenticated = True
+            st.rerun()
+        else:
+            st.error("❌ كلمة السر غير صحيحة، حاول مرة أخرى.")
+    st.stop() # إيقاف باقي الصفحة حتى يتم إدخال كلمة السر الصحيحة
 
 st.title("🤖 منصة الذكاء الاصطناعي الموحدة (AI Hub Pro)")
 st.caption("تطبيق شامل للمحادثة، تحليل الملفات، وتوليد الصور")
